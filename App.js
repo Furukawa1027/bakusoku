@@ -1,6 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import {
+  createAppContainer, 
+  createBottomTabNavigator,
+  createSwitchNavigator
+ } from 'react-navigation';
 import WelcomeScreen from './screens/WelcomeScreen';
 
 import HomeScreen from './screens/HomeScreen'; 
@@ -10,14 +14,15 @@ import ProfileScreen from './screens/ProfileScreen';
 
 export default class App extends React.Component {
   render() {
+    const MainTab = createBottomTabNavigator({
+      homeStack: { screen: HomeScreen },
+      addStack: { screen: AddScreen },
+      profileStack: { screen: ProfileScreen }
+    });
     const NavigatorTab = createAppContainer(
-      createBottomTabNavigator({
-        welcome: { screen: WelcomeScreen },
-        main: createBottomTabNavigator({
-          homeStack: { screen: HomeScreen },
-          addStack: { screen: AddScreen },
-          profileStack: { screen: ProfileScreen }
-        })
+      createSwitchNavigator({
+        welcom: { screen: WelcomeScreen },
+        main: { screen: MainTab }
       })
     );
 

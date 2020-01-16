@@ -12,14 +12,16 @@ const SLIDE_DATA = [
 
   class WelcomeScreen extends React.Component {
     onStartButtonPress = () => {
-        Alert.alert(
+      this.props.navigation.navigate('main');
+      
+       /*  Alert.alert(
           'ゆうたろう',
           '左手',
           [
             { text: 'OK' },
           ],
           { cancelable: false }
-        );
+        ); */
       }
     
     
