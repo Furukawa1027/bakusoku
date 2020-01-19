@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import {
   createAppContainer, 
   createBottomTabNavigator,
@@ -20,9 +20,37 @@ import Setting2Screen from './screens/Setting2Screen';
 
 export default class App extends React.Component {
   render() {
+    const headerNavigationOptions = {
+      headerStyle: {
+        backgroundColor: 'deepskyblue',
+        marginTop: (Platform.OS === 'android' ? 24 : 0)
+      },
+      headerTitleStyle: { color: 'white' },
+      headerTintColor: 'white',
+    };
+    
     const HomeStack = createStackNavigator({
-      home: { screen: HomeScreen },
-      detail: { screen: DetailScreen }
+      home: {
+        screen: HomeScreen,
+        navigationOptions: {
+          headerStyle: {
+            backgroundColor: 'deepskyblue',
+            marginTop: (Platform.OS === 'android' ? 24 : 0)
+          },
+          headerTitleStyle: { color: 'white' },
+          headerTintColor: 'white',
+    
+          headerTitle: 'Treco',
+          headerBackTitle: 'Home'
+        }
+      },
+      detail: {
+        screen: DetailScreen,
+        navigationOptions: {
+          ...headerNavigationOptions,
+          headerTitle: 'Detail',
+        }
+      }
     });
     
     HomeStack.navigationOptons = ({ navigation }) => {
@@ -42,9 +70,29 @@ export default class App extends React.Component {
     };
 
     const ProfileStack = createStackNavigator({ 
-      profile: { screen: ProfileScreen },
-      setting1: { screen: Setting1Screen },
-      setting2: { screen: Setting2Screen }
+      profile: {
+        screen: ProfileScreen,
+        navigationOptions: {
+          ...headerNavigationOptions,
+          headerTitle: 'Treco',
+          headerBackTitle: 'Profile' 
+        }
+      },
+
+      setting1: { 
+        screen: Setting1Screen,
+        navigationOptions: {
+          ...headerNavigationOptions,
+          haederTitle: 'Setting 1',
+        }
+      },
+      setting2: { 
+        screen: Setting2Screen,
+        navigationOptions: {
+          ...headerNavigationOptions,
+          haederTitle: 'Setting 2'
+      }
+    }
     });
 
     ProfileStack.navigationOptions = ({ navigation }) => {
@@ -65,7 +113,7 @@ export default class App extends React.Component {
         main: { screen: MainTab }
       })
     );
-
+    
     return (
       <View style={styles.container}>
         <NavigatorTab />
