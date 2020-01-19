@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, Platform } from 'react-native';
 import {
   createAppContainer, 
   createBottomTabNavigator,
@@ -60,7 +60,12 @@ export default class App extends React.Component {
     };
 
     const AddStack = createStackNavigator({
-      add: { screen: AddScreen }
+      add: {
+        screen: AddScreen,
+        navigationOptions: {
+          header: null
+        }
+      }
     });
     
     AddStack.navigationOptions = ({ navigation }) => {
@@ -102,9 +107,22 @@ export default class App extends React.Component {
     };
 
     const MainTab = createBottomTabNavigator({
-      homeStack: { screen: HomeStack },
+      homeStack: { 
+        screen: HomeStack,
+        navigationOptions: {
+          tabBarIcon: ({ tintColor }) => (
+            <Image
+            style={{ height: 25, width: 25, tintColor: tintColor}}
+            source={require('./assets/home.png')}
+            />
+          ),
+          title: 'Home'
+        } 
+      },
       addStack: { screen: AddStack },
       profileStack: { screen: ProfileStack }
+    }, {
+      swipeEnabled: false,
     });
     
     const NavigatorTab = createAppContainer(
