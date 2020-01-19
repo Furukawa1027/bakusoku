@@ -24,17 +24,35 @@ export default class App extends React.Component {
       home: { screen: HomeScreen },
       detail: { screen: DetailScreen }
     });
+    
+    HomeStack.navigationOptons = ({ navigation }) => {
+      return {
+        tabBarVisible: (navigation.state.index === 0)
+      };
+    };
 
     const AddStack = createStackNavigator({
       add: { screen: AddScreen }
     });
+    
+    AddStack.navigationOptions = ({ navigation }) => {
+      return {
+        tabBarVisible: (navigation.state.index === -1)
+      };
+    };
 
     const ProfileStack = createStackNavigator({ 
       profile: { screen: ProfileScreen },
       setting1: { screen: Setting1Screen },
       setting2: { screen: Setting2Screen }
     });
-  
+
+    ProfileStack.navigationOptions = ({ navigation }) => {
+      return {
+        tabBarVisible: (navigation.state.index === 0)
+      };
+    };
+
     const MainTab = createBottomTabNavigator({
       homeStack: { screen: HomeStack },
       addStack: { screen: AddStack },
