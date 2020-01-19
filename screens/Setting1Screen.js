@@ -3,15 +3,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 
 
-class HomeScreen extends React.Component {
+class Setting1Screen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center' }}>
-        <Text>This is HomeScreen</Text>
+        <Text>This is Setting1Screen</Text>
 
         <Button
-        title="Go to DetailScreen"
-        onPress={() => this.props.navigation.navigate('detail')}
+          title="Go to Setting2Screen"
+          onPress={() => this.props.navigation.navigate('setting2')}
         />
       </View>
     );
@@ -19,4 +19,4 @@ class HomeScreen extends React.Component {
 }
 
 
-export default HomeScreen;
+export default Setting1Screen;

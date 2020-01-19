@@ -31,7 +31,7 @@ const SLIDE_DATA = [
             <Button
               style={{ padding: 10 }}
               buttonStyle={{ backgroundColor: 'deepskyblue' }}
-              title="Let's get it started!"
+              title="スタート"
               onPress={this.onStartButtonPress}
             />
           );
