@@ -3,22 +3,44 @@ import { StyleSheet, Text, View } from 'react-native';
 import {
   createAppContainer, 
   createBottomTabNavigator,
-  createSwitchNavigator
+  createSwitchNavigator,
+  createStackNavigator
  } from 'react-navigation';
+
+
 import WelcomeScreen from './screens/WelcomeScreen';
 
 import HomeScreen from './screens/HomeScreen'; 
+import DetailScreen from './screens/DetailScreen';
 import AddScreen from './screens/AddScreen'; 
 import ProfileScreen from './screens/ProfileScreen'; 
+import Setting1Screen from './screens/Setting1Screen';
+import Setting2Screen from './screens/Setting2Screen';
 
 
 export default class App extends React.Component {
   render() {
-    const MainTab = createBottomTabNavigator({
-      homeStack: { screen: HomeScreen },
-      addStack: { screen: AddScreen },
-      profileStack: { screen: ProfileScreen }
+    const HomeStack = createStackNavigator({
+      home: { screen: HomeScreen },
+      detail: { screen: DetailScreen }
     });
+
+    const AddStack = createStackNavigator({
+      add: { screen: AddScreen }
+    });
+
+    const ProfileStack = createStackNavigator({ 
+      profile: { screen: ProfileScreen },
+      setting1: { screen: Setting1Screen },
+      setting2: { screen: Setting2Screen }
+    });
+  
+    const MainTab = createBottomTabNavigator({
+      homeStack: { screen: HomeStack },
+      addStack: { screen: AddStack },
+      profileStack: { screen: ProfileStack }
+    });
+    
     const NavigatorTab = createAppContainer(
       createSwitchNavigator({
         welcom: { screen: WelcomeScreen },
