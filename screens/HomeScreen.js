@@ -1,18 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { ButtonGroup } from 'react-native-elements';
 
 
 class HomeScreen extends React.Component {
   render() {
+      const buttonList = [
+        'All',
+        'Great(0)',
+        'Good(0)',
+        'Poor(0)',
+      ];
     return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <Text>This is HomeScreen</Text>
-
-        <Button
-        title="Go to DetailScreen"
-        onPress={() => this.props.navigation.navigate('detail')}
-        />
+      <View style={{ flex: 1 }}>
+      <ButtonGroup
+        buttons={buttonList}
+      />
       </View>
     );
   }
