@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Platform } from 'react-native';
+import { StyleSheet, Text, View, Image, StatusBar, Platform } from 'react-native';
 import {
   createAppContainer, 
   createBottomTabNavigator,
@@ -112,17 +112,39 @@ export default class App extends React.Component {
         navigationOptions: {
           tabBarIcon: ({ tintColor }) => (
             <Image
-            style={{ height: 25, width: 25, tintColor: tintColor}}
+            style={{ height: 25, width: 25, tintColor: tintColor }}
             source={require('./assets/home.png')}
             />
           ),
           title: 'Home'
         } 
       },
-      addStack: { screen: AddStack },
-      profileStack: { screen: ProfileStack }
+      addStack: {
+        screen: AddStack,
+        navigationOptions: {
+          tabBarIcon: () => (
+            <Image
+              style={{ height: 60, width: 60, tintColor: 'deepskyblue' }}
+              source={require('./assets/add.png')}
+            />
+          ),
+          title: '',
+        }
+      },
+      profileStack: {
+        screen: ProfileStack,
+        navigationOptions: {
+          tabBarIcon: ({ tintColor }) => (
+            <Image
+              style={{ height: 25, width: 25, tintColor: tintColor }}
+              source={require('./assets/profile.png')}
+            />
+          ),
+          title: 'Profile'
+        }
+      }
     }, {
-      swipeEnabled: false,
+      swipeEnabled: false, // Android用
     });
     
     const NavigatorTab = createAppContainer(
@@ -134,6 +156,7 @@ export default class App extends React.Component {
     
     return (
       <View style={styles.container}>
+        <StatusBar barStyle="light-content" />
         <NavigatorTab />
       </View>
     );
