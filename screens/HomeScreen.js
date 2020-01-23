@@ -58,8 +58,12 @@ class HomeScreen extends React.Component {
     super(props);
 
     this.state = {
-      selectedIndex: ALL_INDEX, // ← 変更部分
+      selectedIndex: ALL_INDEX, 
     };
+  }
+
+  onListItemPress = (selectedReview) =>{
+    this.props.navigation.navigation('detail');
   }
 
   renderReviews() {
@@ -84,13 +88,10 @@ class HomeScreen extends React.Component {
 
     let rankedReviews = [];
 
-    // もし`this.state.selectedIndex`が`ALL_INDEX`だったら、
-    if (this.state.selectedIndex === ALL_INDEX) { // ←追記部分
-      // 丸ごとコピー
-      rankedReviews = allReviewsTmp; // ←追記部分
-    // もしそうじゃなかったら、
-    } else { // ←追記部分
-      // 繰り返し処理
+    
+    if (this.state.selectedIndex === ALL_INDEX) { 
+      rankedReviews = allReviewsTmp; 
+    } else { 
       for (let i = 0; i < allReviewsTmp.length; i++) {
         if (allReviewsTmp[i].rank === reviewRank) {
           rankedReviews.push(allReviewsTmp[i]);
@@ -138,24 +139,47 @@ class HomeScreen extends React.Component {
   onButtonGroupPress = (selectedIndex) => {
     this.setState({
       selectedIndex: selectedIndex
-      // selectedIndex: selectedIndex → selectedIndex と省略しても可
     });
   }
   
   render() {
+    let nGreat = 0;
+    let nGood = 0;
+    let nPoor = 0;
+
+    for (let i = 0; i < allReviewsTmp.length; i++) {
+      switch (allReviewsTmp[i].rank) {
+        case GREAT:
+          nGreat++;
+          break;
+
+        case GOOD:
+          nGood++;
+          break;
+
+        case POOR:
+          nPoor++;
+          break;
+
+        default:
+          break;
+      }
+    }
+
     const buttonList = [
-      'すべて',
-      'グレート (0)',
-      'グッド (0)',
-      'Poor (0)',
+      `All (${allReviewsTmp.length})`,
+      `Great(${nGreat})`,
+      `Good(${nGood})`,
+      `POOR(${nPoor})`
     ];
+
   
     return (
       <View style={{ flex: 1 }}>
         <ButtonGroup
           buttons={buttonList}
           selectedIndex={this.state.selectedIndex}
-          onPress={this.onButtonGroupPress} // ←追記部分
+          onPress={this.onButtonGroupPress} 
         />
         {this.renderReviews()} 
       </View>
